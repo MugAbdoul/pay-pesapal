@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Error{% endblock %}
+
+{% block content %}
+<div class="result-container error">
+    <div class="result-icon error"></div>
+    <h2>Payment Failed</h2>
+    <p>{{ error_message | default("There was an error processing your payment.") }}</p>
+    
+    <div class="error-actions">
+        <a href="{{ url_for('index') }}" class="btn-secondary">Return to Homepage</a>
+        <a href="{{ url_for('checkout') }}" class="btn-primary">Try Again</a>
+    </div>
+</div>
+{% endblock %}

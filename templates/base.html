@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Secure Payment Portal{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Company Logo">
+                <h1>Secure Payments</h1>
+            </div>
+            <div class="secure-badge">
+                <img src="{{ url_for('static', filename='img/secure.svg') }}" alt="Secure">
+                <span>256-bit Encrypted</span>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Your Company. All rights reserved.</p>
+            <div class="payment-methods">
+                <span>Powered by Pesapal</span>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year for copyright
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

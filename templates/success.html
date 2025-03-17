@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="result-container success">
+    <div class="result-icon success"></div>
+    <h2>Payment Successful!</h2>
+    <p>Your transaction has been completed successfully.</p>
+    
+    <div class="transaction-details">
+        <div class="detail-row">
+            <span class="label">Reference:</span>
+            <span class="value">{{ transaction.order_id }}</span>
+        </div>
+        <div class="detail-row">
+            <span class="label">Amount:</span>
+            <span class="value">KES {{ transaction.amount }}</span>
+        </div>
+    </div>
+    
+    <a href="{{ url_for('index') }}" class="btn-primary">Return to Homepage</a>
+</div>
+{% endblock %}

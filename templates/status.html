@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Status{% endblock %}
+
+{% block content %}
+<div class="status-container">
+    <h2>Transaction Status</h2>
+    
+    <div class="status-card">
+        <div class="status-header {% if transaction.status == 'COMPLETED' %}success{% elif transaction.status == 'FAILED' %}failed{% else %}pending{% endif %}">
+            <div class="status-icon"></div>
+            <h3>{{ transaction.status }}</h3>
+        </div>
+        
+        <div class="status-details">
+            <div class="detail-row">
+                <span class="label">Order Reference:</span>
+                <span class="value">{{ transaction.order_id }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Amount:</span>
+                <span class="value">KES {{ transaction.amount }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Description:</span>
+                <span class="value">{{ transaction.description }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="label">Date:</span>
+                <span class="value">{{ transaction.created_at|date }}</span>
+            </div>
+        </div>
+        
+        <div class="status-actions">
+            {% if transaction.status == 'COMPLETED' %}
+                <a href="{{ url_for('index') }}" class="btn-secondary">Return to Homepage</a>
+            {% elif transaction.status == 'FAILED' %}
+                <a href="{{ url_for('checkout') }}" class="btn-primary">Try Again</a>
+            {% else %}
+                <button id="refresh-status" class="btn-primary">Refresh Status</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('refresh-status')?.addEventListener('click', function() {
+        location.reload();
+    });
+</script>
+{% endblock %}
